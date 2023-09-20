@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Base Django Project{% endblock %}</title>
+
+    {% if site_setings.favicon %}
+        <link rel="icon" type="image/x-icon" href="{{ site_settings.favicon.url }}">
+    {% endif %}
+
+    {# Meta tags #}
+    {# <meta charset="utf-8">#}
+
+    {# Stylesheets #}
+    {# <link rel="stylesheet" href="css/master.css"> #}
+
+    {# Scripts #}
+    {# <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> #}
+
+    {#  Apply extra head html from site settings #}
+    {% autoescape off %}{{ site_settings.extra_head_html }}{% endautoescape %}
+    {# Extra head can be added in child html #}
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% block content %}
+        <h1>UTM playground</h1>
+        <p>Current user has these UTM's: </p>
+        <ul>
+        {% for uname, uval in request.session.utm.items %}
+            <li>{{ uname }}: {{ uval }}</li>
+        {% empty %}
+            <li>No UTM's</li>
+        {% endfor %}
+        </ul>
+    {% endblock %}
+
+    {# Apply extra body html from site settings #}
+    {% autoescape off %}{{ site_settings.extra_body_html }}{% endautoescape %}
+</body>
+</html>
