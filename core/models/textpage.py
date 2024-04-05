@@ -17,7 +17,7 @@ class TextPage(BaseMenuItemModel, BaseSEOModel):
         verbose_name="Является стандартной страницей",
         help_text="Снять галочку, если страница обрабатывается кастомной view",
         blank=True,
-        default=True
+        default=False
     )
 
     def __str__(self):

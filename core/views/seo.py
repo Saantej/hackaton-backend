@@ -14,7 +14,7 @@ from core import models
 
 def robots_txt_view(request):
     site_settings = models.SiteSettings.get()
-    return HttpResponse(site_settings.robots)
+    return HttpResponse(site_settings.robots, content_type="text/plain")
 
 
 class TextPageSitemap(Sitemap):
@@ -27,11 +27,11 @@ class TextPageSitemap(Sitemap):
 
 @x_robots_tag
 def sitemap(
-    request,
-    sitemaps,
-    section=None,
-    template_name="sitemap.xml",
-    content_type="application/xml",
+        request,
+        sitemaps,
+        section=None,
+        template_name="sitemap.xml",
+        content_type="application/xml",
 ):
     req_protocol = request.scheme
     req_site = RequestSite(request)
@@ -70,4 +70,3 @@ def sitemap(
             )
         )
     return response
-

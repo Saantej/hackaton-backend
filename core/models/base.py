@@ -28,4 +28,4 @@ class BaseMenuItemModel(models.Model):
         abstract = True
 
     menu_title = models.CharField(max_length=200, verbose_name="Название в меню", blank=True)
-    menu_position = models.IntegerField(verbose_name="Позиция в меню", blank=True)
+    menu_position = models.IntegerField(verbose_name="Позиция в меню", default=0, blank=True)
