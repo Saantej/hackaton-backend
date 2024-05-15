@@ -1,3 +1,5 @@
+import pdb
+
 from django.template import Template, Context
 
 from . import tasks, api_urls, models
@@ -11,7 +13,6 @@ def create_lead(name, phone, email=None, **extra_fields):
         title_template = Template(site_settings.bitrix_lead_title_template)
         title = title_template.render(Context({
             "phone": phone,
-            "email": email,
             **extra_fields
         }))
 
@@ -24,3 +25,4 @@ def create_lead(name, phone, email=None, **extra_fields):
             email=email,
             **extra_fields
         )
+        print(1)

@@ -10,5 +10,5 @@ router.register(r"redirect", views.RedirectsViewSet)
 
 urlpatterns = [
     path('', include("knox.urls")),
-    path('feedback_request/', views.FeedbackRequestCreateView.as_view(), name="api-feedbackrequest-list"),
+    path('feedback-request/', views.FeedbackRequestCreateView.as_view(), name="api-feedbackrequest-list"),
 ] + router.urls
