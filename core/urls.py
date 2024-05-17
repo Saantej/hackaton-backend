@@ -4,10 +4,11 @@ from django.views.generic import TemplateView
 from . import views
 
 sitemaps = {
+    'index': views.IndexSitemap,
     'textpage': views.TextPageSitemap,
     'staticviews': views.StaticViewsSitemap,
 }
-
+app_name = 'core'
 
 urlpatterns = [
     path('', TemplateView.as_view(**{"template_name": "base.html"}), name="index"),

@@ -12,6 +12,17 @@ class TextPageSitemap(Sitemap):
         return models.TextPage.objects.filter(is_generic_page=True, show_in_sitemap=True)
 
 
+class IndexSitemap(Sitemap):
+    priority = 1.0
+    changefreq = 'daily'
+
+    def items(self):
+        return ['core:index']
+
+    def location(self, item):
+        return reverse(item)
+
+
 class StaticViewsSitemap(Sitemap):
     """Reverse 'static' views for XML sitemap."""
     changefreq = "daily"
