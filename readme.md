@@ -19,6 +19,8 @@
 Устанавливаем зависимости
 `pipenv sync`
 
+Создаём sites
+`python manage.py create_sites`
 
 
 ## Работа с зависимостями
