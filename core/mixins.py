@@ -57,5 +57,5 @@ class TextPageMixin:
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["text_page_obj"] = self.text_page_obj
+        ctx["seo_object"] = self.text_page_obj
         return ctx
