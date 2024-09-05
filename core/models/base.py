@@ -1,5 +1,6 @@
 import datetime
 
+from ckeditor.fields import RichTextField
 from django.db import models
 
 
@@ -7,7 +8,9 @@ class BaseSEOModel(models.Model):
     class Meta:
         abstract = True
 
+    name = models.CharField("Название", max_length=200)
     slug = models.SlugField("Slug", unique=True)
+    content = RichTextField(verbose_name="Контент", config_name='default', blank=True)
 
     show_in_sitemap = models.BooleanField(default=True, verbose_name="Показывать в карте сайта")
 
@@ -21,6 +24,9 @@ class BaseSEOModel(models.Model):
     seo_title = models.CharField(max_length=200, verbose_name="Title", blank=True)
     seo_description = models.CharField(max_length=500, verbose_name="Description", blank=True)
     seo_keywords = models.CharField(max_length=500, verbose_name="Keywords", blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class BaseMenuItemModel(models.Model):

@@ -14,4 +14,4 @@ class Command(BaseCommand):
             Site.objects.create(name=options['domain'], domain=options['domain'])
             self.stdout.write(self.style.SUCCESS('Сайт добавлен'))
         except Exception as e:
-            self.stdout.write(self.style.ERROR('Сайт добавлен'))
+            self.stdout.write(self.style.ERROR(e))

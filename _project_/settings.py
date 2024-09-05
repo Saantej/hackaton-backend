@@ -42,12 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.redirects',
     'debug_toolbar',
     'ckeditor',
+    'drf_yasg',
+    'rangefilter',
     'knox',
-    'eav',
     'mptt',
     'accounts',
     'core',
-    'integrations.bitrix',
 ]
 
 MIDDLEWARE = [
@@ -166,13 +166,14 @@ REST_FRAMEWORK = {
 }
 
 REST_KNOX = {
-    'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
+    'SECURE_HASH_ALGORITHM': 'hashlib.sha512',
     'AUTH_TOKEN_CHARACTER_LENGTH': 64,
     'TOKEN_TTL': None,  # Endless
     'USER_SERIALIZER': 'knox.serializers.UserSerializer',
     'TOKEN_LIMIT_PER_USER': None,
     'AUTO_REFRESH': False,
 }
+KNOX_TOKEN_MODEL = 'knox.AuthToken'
 
 AUTH_USER_MODEL = "accounts.User"
 
@@ -209,19 +210,10 @@ LOGGING = {
             "class": "logging.FileHandler",
             "filename": os.path.join(BASE_LOGS_DIR, "celery.log"),
         },
-        "telegram": {
-            "level": "ERROR",
-            "class": "utils.telegram.logging.TelegramHandler",
-        },
     },
     "loggers": {
         "django": {
             "handlers": ["debug_file"],
-            "level": "DEBUG",
-            "propagate": True,
-        },
-        "django.request": {
-            "handlers": ["telegram"],
             "level": "DEBUG",
             "propagate": True,
         },

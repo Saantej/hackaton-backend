@@ -18,6 +18,10 @@ django-rest-knox = "*"
 celery = {extras = ["redis"], version = "*"}
 django-environ = "*"
 gunicorn = "*"
+drf-yasg = "*"
+bs4 = "*"
+humanize = "*"
+django-admin-rangefilter = "*"
 
 [dev-packages]
 

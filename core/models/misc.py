@@ -53,8 +53,8 @@ class ExtraFields(models.Model):
 class FeedbackRequest(models.Model):
     first_name = models.CharField(max_length=64, verbose_name="Имя", blank=True)
     phone = models.CharField(max_length=24, verbose_name="Телефон", blank=True)
-    message = models.TextField(verbose_name="Сообщение", blank=True)
-    company_name = models.CharField(verbose_name="Название компании", max_length=128, blank=True)
+    comment = models.TextField(verbose_name="Комментарий", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Заявка на обратную связь"

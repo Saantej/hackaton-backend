@@ -63,6 +63,8 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+    {% block header %}{% endblock %}
+
     {% block content %}
         <h1>UTM playground</h1>
         <p>Current user has these UTM's: </p>
@@ -74,6 +76,8 @@
         {% endfor %}
         </ul>
     {% endblock %}
+
+    {% block footer %}{% endblock %}
 
     {# Apply extra body html from site settings #}
     {% autoescape off %}{{ site_settings.extra_body_html }}{% endautoescape %}

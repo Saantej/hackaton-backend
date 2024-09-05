@@ -20,7 +20,7 @@
 `pipenv sync`
 
 Создаём sites
-`python manage.py create_sites`
+`python manage.py create_sites domain=your_domain`
 
 
 ## Работа с зависимостями
