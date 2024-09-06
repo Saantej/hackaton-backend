@@ -31,12 +31,19 @@ class ArticleManager(models.Manager):
 class Article(BaseSEOModel):
     is_published = models.BooleanField(default=False, verbose_name="Опубликовано")
     image = models.FileField(verbose_name="Изображение", upload_to="articles/", blank=True)
+    publish_at = models.DateTimeField(verbose_name="Дата публикации", help_text="Используется для отложенного постинга",
+                                      null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     objects = ArticleManager()
 
     def __str__(self):
         return self.name
+
+    def publish(self):
+        """Функция для публикации статьи"""
+        self.is_published = True
+        self.save()
 
     @property
     def next_article(self):

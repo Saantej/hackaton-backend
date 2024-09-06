@@ -20,5 +20,34 @@ class CompanyContactsAdmin(mixins.SingleObjectAdminMixin, admin.ModelAdmin):
     pass
 
 
-admin.site.register(models.TextPage, admin.ModelAdmin)
+@admin.register(models.Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ("name", "publish_at", "is_published")
+    list_filter = ("is_published",)
+    fieldsets = [
+        (
+            'Основная информация',
+            {
+                "fields": ('name', 'image', 'is_published', 'publish_at')
+            }
+        ),
+        constants.AdminFields.SEO_FIELD
+    ]
+    prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(models.TextPage)
+class TextPageAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (
+            'Основная информация',
+            {
+                "fields": ('name',)
+            }
+        ),
+        constants.AdminFields.SEO_FIELD
+    ]
+    prepopulated_fields = {'slug': ('name',)}
+
+
 admin.site.register(models.TelegramBotCredentials, admin.ModelAdmin)

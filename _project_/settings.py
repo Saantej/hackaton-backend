@@ -179,8 +179,8 @@ AUTH_USER_MODEL = "accounts.User"
 
 if USE_TZ:
     CELERY_TIMEZONE = TIME_ZONE
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
@@ -188,11 +188,12 @@ CELERY_TASK_TIME_LIMIT = 1 * 60 * 5
 CELERY_TASK_SOFT_TIME_LIMIT = 1 * 60 * 4
 CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 
+
 CELERY_BEAT_SCHEDULE = {
-    "update-tasks": {
-        "task": "core.tasks.updateTasks",
-        "schedule": crontab(hour=7, minute=0)
-    }
+    'publish_articles': {
+        'task': 'core.tasks.publish_scheduled_articles',
+        'schedule': 5.0,
+    },
 }
 
 DEFAULT_BASE_LOGS_DIR = os.path.join(BASE_DIR, "logs")
