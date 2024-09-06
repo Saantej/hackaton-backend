@@ -188,11 +188,10 @@ CELERY_TASK_TIME_LIMIT = 1 * 60 * 5
 CELERY_TASK_SOFT_TIME_LIMIT = 1 * 60 * 4
 CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 
-
 CELERY_BEAT_SCHEDULE = {
     'publish_articles': {
         'task': 'core.tasks.publish_scheduled_articles',
-        'schedule': 5.0,
+        'schedule': crontab(hour=1),
     },
 }
 
