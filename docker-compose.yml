@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    env_file: 
+          - .env
+
+  web:
+    build: .
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    networks:
+      - app-network
+    command: >
+      sh -c "
+      while ! nc -z db 5432; do sleep 1; done;
+      python manage.py migrate &&
+      python manage.py init_site &&
+      python manage.py runserver 0.0.0.0:8000"
+  
+volumes:
+  db-data:
+
+networks:
+  app-network:
+    driver: bridge

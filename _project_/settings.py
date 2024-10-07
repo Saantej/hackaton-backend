@@ -197,29 +197,29 @@ CELERY_BEAT_SCHEDULE = {
 
 DEFAULT_BASE_LOGS_DIR = os.path.join(BASE_DIR, "logs")
 BASE_LOGS_DIR = env("LOGS_DIR", default=DEFAULT_BASE_LOGS_DIR)
-LOGGING = {
-    "version": 1,
-    "handlers": {
-        "debug_file": {
-            "level": "DEBUG",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_LOGS_DIR, "debug.log"),
-        },
-        "celery_file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_LOGS_DIR, "celery.log"),
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["debug_file"],
-            "level": "DEBUG",
-            "propagate": True,
-        },
-        "celery": {
-            "handlers": ["celery_file"],
-            "level": "INFO"
-        },
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "handlers": {
+#         "debug_file": {
+#             "level": "DEBUG",
+#             "class": "logging.FileHandler",
+#             "filename": os.path.join(BASE_LOGS_DIR, "debug.log"),
+#         },
+#         "celery_file": {
+#             "level": "INFO",
+#             "class": "logging.FileHandler",
+#             "filename": os.path.join(BASE_LOGS_DIR, "celery.log"),
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["debug_file"],
+#             "level": "DEBUG",
+#             "propagate": True,
+#         },
+#         "celery": {
+#             "handlers": ["celery_file"],
+#             "level": "INFO"
+#         },
+#     },
+# }
