@@ -1,6 +1,6 @@
-# Base django project docker
+## Base django project docker
 
-## Развертка проекта в докере
+# Развертка проекта в докере
 
 
 
