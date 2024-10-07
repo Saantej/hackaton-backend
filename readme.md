@@ -1,14 +1,9 @@
-# Base django project
+## Base django project docker
 
-## Deploy
+# Развертка проекта в докере
 
-`sudo apt-get install redis-server build-essential libssl-dev libffi-dev python3-dev`
 
-Устанавливаем pipenv глобально
 
-`pip install pipenv --user`
-
-`ln -s /home/<user>/.local/bin/pipenv /usr/bin/pipenv` (see )
 
 Создаём файл с переменными окружения:
 `cp example.env .env`
@@ -16,30 +11,19 @@
 Открываем и заполняем доступы:
 `nano .env`
 
-Устанавливаем зависимости
-`pipenv sync`
+# Запуск докера 
 
-Создаём sites
-`python manage.py create_sites domain=your_domain`
+` docker compose up --build `
+
+Миграции 
+
+`docker exec -it <container_name> python manage.py makemigrations`
 
 
-## Работа с зависимостями
-См. https://pipenv.pypa.io/en/latest/pipfile
-### Активация virtualenv 
-`pipenv shell`
+`docker exec -it <container_name> python manage.py migrate`
 
-`python manage.py runserver`
-
-### Выйти из шелла
-`exit`
-
-### Добавить новую зависимость
-`pipenv install django-whatever`
-
-После этого необходимо закоммитить `pipfile` и `pipfile.lock`
-
-### Установить зависимости (на новую машину)
-`pipenv sync`
+Чтобы узнать название container_name
+`docker ps`
 
 
 ## Доступный функционал "из коробки"
