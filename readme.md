@@ -1,6 +1,6 @@
-# Base django project
+# Base django project docker
 
-## Развертка
+## Развертка проекта в докере
 
 
 
@@ -11,13 +11,15 @@
 Открываем и заполняем доступы:
 `nano .env`
 
-Запуск докера 
+# Запуск докера 
 
 ` docker compose up --build `
 
 Миграции 
 
 `docker exec -it <container_name> python manage.py makemigrations`
+
+
 `docker exec -it <container_name> python manage.py migrate`
 
 Чтобы узнать название container_name
