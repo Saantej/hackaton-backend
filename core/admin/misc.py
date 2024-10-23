@@ -50,4 +50,7 @@ class TextPageAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
-admin.site.register(models.TelegramBotCredentials, admin.ModelAdmin)
+@admin.register(models.Task)
+class TaskAdmin(admin.ModelAdmin):
+    pass
+

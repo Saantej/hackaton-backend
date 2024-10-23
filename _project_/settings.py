@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'mptt',
     'accounts',
     'core',
+    'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -156,7 +158,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'knox.auth.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -195,31 +197,41 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+
 DEFAULT_BASE_LOGS_DIR = os.path.join(BASE_DIR, "logs")
 BASE_LOGS_DIR = env("LOGS_DIR", default=DEFAULT_BASE_LOGS_DIR)
 # LOGGING = {
-#     "version": 1,
-#     "handlers": {
-#         "debug_file": {
-#             "level": "DEBUG",
-#             "class": "logging.FileHandler",
-#             "filename": os.path.join(BASE_LOGS_DIR, "debug.log"),
-#         },
-#         "celery_file": {
-#             "level": "INFO",
-#             "class": "logging.FileHandler",
-#             "filename": os.path.join(BASE_LOGS_DIR, "celery.log"),
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
 #         },
 #     },
-#     "loggers": {
-#         "django": {
-#             "handlers": ["debug_file"],
-#             "level": "DEBUG",
-#             "propagate": True,
+#     'root': {
+#         'handlers': ['console'],
+#         'level': 'DEBUG',
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'level': 'DEBUG',
+#             'handlers': ['console'],
 #         },
-#         "celery": {
-#             "handlers": ["celery_file"],
-#             "level": "INFO"
+#         'your_project_name': {  # Замените на имя вашего проекта
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#             'propagate': True,
 #         },
 #     },
 # }
+    

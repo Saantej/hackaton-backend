@@ -62,3 +62,40 @@ class FeedbackRequest(models.Model):
 
     def __str__(self):
         return f'Заявка от {self.phone}'
+
+
+from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class Task(models.Model):
+    BACKLOG = 'backlog'
+    BLOCKED = 'blocked'
+    IN_PROGRESS = 'in_progress'
+    READY_TO_TEST = 'ready_to_test'
+    DONE = 'done'
+
+    STATUS_CHOICES = [
+        (BACKLOG, 'В ожидании'),
+        (BLOCKED, 'Заблокирована'),
+        (IN_PROGRESS, 'В процессе'),
+        (READY_TO_TEST, 'Готова к тесту'),
+        (DONE, 'Завершена'),
+    ]
+
+    title = models.CharField(max_length=255, verbose_name='Название задачи')
+    description = models.TextField(blank=True, null=True, verbose_name='Описание')
+    complexity = models.CharField(max_length=50, default='medium', verbose_name='Сложность')
+    priority = models.CharField(max_length=50, default='medium', verbose_name='Приоритет')
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=BACKLOG, verbose_name='Статус')
+    created_by = models.ForeignKey(User, related_name='created_tasks', on_delete=models.CASCADE, verbose_name='Создатель')
+    assigned_to = models.ManyToManyField(User, related_name='assigned_tasks', blank=True, verbose_name='Исполнители')
+    start_date = models.DateField(null=True, blank=True, verbose_name='Дата начала')
+    end_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    assigned_by = models.ForeignKey(User, related_name='assigned_tasks_by', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Назначил')
+
+    def __str__(self):
+        return self.title

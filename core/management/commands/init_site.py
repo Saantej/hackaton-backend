@@ -7,8 +7,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         site, created = Site.objects.get_or_create(
-            domain="127.0.0.1:8000",
-            defaults={'name': "127.0.0.1:8000"}
+            domain="0.0.0.0:8002",
+            defaults={'name': "0.0.0.0:8002"}
         )
         if created:
             self.stdout.write(self.style.SUCCESS(f"Site created: {site.domain}"))

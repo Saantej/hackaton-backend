@@ -16,3 +16,4 @@ drf-yasg
 beautifulsoup4  
 humanize
 django-admin-rangefilter
+djangorestframework-simplejwt
