@@ -6,7 +6,7 @@ from .serializers import *
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import EmailTokenObtainPairSerializer
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status 
 from core.models import Task
 from rest_framework.permissions import IsAuthenticated
 from .serializers import TaskSerializer
