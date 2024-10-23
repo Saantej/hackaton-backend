@@ -67,6 +67,20 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = '_project_.urls'
 
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://hackathon.tspkdop.ru',
+
+]
+
+CSRF_COOKIE_SECURE = True
+
+CORS_ALLOWED_ORIGINS = [
+    'https://hackathon.tspkdop.ru',
+   
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
