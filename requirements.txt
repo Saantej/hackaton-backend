@@ -17,3 +17,4 @@ beautifulsoup4
 humanize
 django-admin-rangefilter
 djangorestframework-simplejwt
+django-cors-headers

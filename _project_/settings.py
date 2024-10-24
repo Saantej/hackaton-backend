@@ -50,9 +50,11 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -71,9 +73,13 @@ ROOT_URLCONF = '_project_.urls'
 
 CSRF_TRUSTED_ORIGINS = [
     'https://hackathon.tspkdop.ru',
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+
 
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
 CSRF_COOKIE_SECURE = True
 
 CORS_ALLOWED_ORIGINS = [
