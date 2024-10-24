@@ -29,22 +29,30 @@ class FeedbackRequestSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, help_text="Пароль для нового пользователя")
-    email = serializers.EmailField(help_text="Электронная почта пользователя")
-
     class Meta:
         model = User
-        fields = ('password', 'email')
+        fields = ['email', 'password', 'username']
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'username': {'required': False, 'allow_blank': True}
+        }
+
+    def validate_email(self, value):
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Пользователь с таким email уже существует.")
+        return value
 
     def create(self, validated_data):
-        email = validated_data['email']
+        if 'username' not in validated_data or not validated_data['username']:
+            validated_data['username'] = validated_data['email'].split('@')[0]
+        
         user = User(
-            email=email,
-            username=email.split('@')[0],  
+            email=validated_data['email'],
+            username=validated_data['username']  
         )
         user.set_password(validated_data['password'])
         user.save()
-        return user
+        return user      
         
 class EmailTokenObtainPairSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True, help_text="Электронная почта для авторизации")
